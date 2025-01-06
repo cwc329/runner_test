@@ -1,0 +1,19 @@
+name: Apache Benchmark Load Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  load-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y apache2-utils
+
+    - name: Perform load test
+      run: |
+        ab -n 1000 -c 100 https://dwz.ddns.net/shortUrl/1234/
+      continue-on-error: true
